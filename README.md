@@ -4,5 +4,5 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `npm run webpack:run` for a dev server. Navigate to `http://localhost:9000/`. The app will automatically reload if you change any of the source files.
+Run `npm run start` for a dev server. Navigate to `http://localhost:9000/`. The app will automatically reload if you change any of the source files.
 
