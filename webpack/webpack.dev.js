@@ -17,7 +17,7 @@ const ENV = 'development';
 module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
     devtool: 'eval-source-map',
     devServer: {
-        contentBase: './build/www',
+        contentBase: utils.root('dist/www'),
         proxy: [{
             context: [
                 /* jhipster-needle-add-entity-to-webpack - JHipster will add entity api paths here */
@@ -44,12 +44,12 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
         }
     },
     entry: {
-        polyfills: './src/main/webapp/app/polyfills',
-        global: './src/main/webapp/content/scss/global.scss',
-        main: './src/main/webapp/app/app.main'
+        polyfills: 'src/polyfills',
+        global: 'src/content/scss/global.scss',
+        main: 'src/main.ts'
     },
     output: {
-        path: utils.root('build/www'),
+        path: utils.root('dist/www'),
         filename: 'app/[name].bundle.js',
         chunkFilename: 'app/[id].chunk.js'
     },
@@ -67,7 +67,7 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
                 {
                     loader: 'cache-loader',
                     options: {
-                      cacheDirectory: path.resolve('build/cache-loader')
+                      cacheDirectory: path.resolve('dist/cache-loader')
                     }
                 },
                 {
@@ -90,16 +90,16 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
         },
         {
             test: /\.scss$/,
-            use: ['to-string-loader', 'css-loader', { 
-                loader: 'sass-loader', 
+            use: ['to-string-loader', 'css-loader', {
+                loader: 'sass-loader',
                 options: { implementation: sass }
             }],
             exclude: /(vendor\.scss|global\.scss)/
         },
         {
             test: /(vendor\.scss|global\.scss)/,
-            use: ['style-loader', 'css-loader', 'postcss-loader', { 
-                loader: 'sass-loader', 
+            use: ['style-loader', 'css-loader', 'postcss-loader', {
+                loader: 'sass-loader',
                 options: { implementation: sass }
             }]
         },
@@ -132,12 +132,9 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
         }),
         new webpack.ContextReplacementPlugin(
             /angular(\\|\/)core(\\|\/)/,
-            path.resolve(__dirname, './src/main/webapp')
+            path.resolve(__dirname, 'src')
         ),
         new writeFilePlugin(),
-        new webpack.WatchIgnorePlugin([
-            utils.root('src/test'),
-        ]),
         new WebpackNotifierPlugin({
             title: 'JHipster',
             contentImage: path.join(__dirname, 'logo-jhipster.png')
