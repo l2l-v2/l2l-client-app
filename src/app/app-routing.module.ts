@@ -13,7 +13,7 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
                 {
                     path: 'admin',
                     loadChildren: './admin/admin.module#AdminModule'
-                }
+                },
             ],
             { useHash: true, enableTracing: DEBUG_INFO_ENABLED }
         )

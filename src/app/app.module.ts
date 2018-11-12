@@ -21,9 +21,20 @@ import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 import {AppComponent} from './app.component';
-
+import {
+  MatInputModule,
+  MatSortModule,
+  MatPaginatorModule
+} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GraphQLModule } from './graphql/graphql.module';
 @NgModule({
     imports: [
+        MatInputModule,
+        MatSortModule,
+        MatPaginatorModule,
+        BrowserAnimationsModule,
+        GraphQLModule,
         BrowserModule,
         AppRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'l2l', separator: '-' }),

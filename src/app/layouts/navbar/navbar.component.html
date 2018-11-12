@@ -30,6 +30,12 @@
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+                  <li>
+                    <a class="dropdown-item" routerLink="/process-instances" routerLinkActive="active" (click)="collapseNavbar()">
+                      <fa-icon [icon]="'road'" [fixedWidth]="true"></fa-icon>
+                      <span jhiTranslate="entity.menu.processInstance">ProcessInstances</span>
+                    </a>
+                  </li>
                 </ul>
             </li>
             <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">

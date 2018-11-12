@@ -88,6 +88,9 @@
         "item-count": "显示第 {{first}} - {{second}} 条，共 {{total}} 条"
     },
     "entity": {
+        "menu" : {
+          "processInstance" : "流程实例"
+        },
         "action": {
             "addblob": "增加 BLOB",
             "addimage": "增加图片",

@@ -90,6 +90,9 @@
         "item-count": "Showing {{first}} - {{second}} of {{total}} items."
     },
     "entity": {
+       "menu" : {
+         "processInstance" : "ProcessInstance"
+        },
         "action": {
             "addblob": "Add blob",
             "addimage": "Add image",
