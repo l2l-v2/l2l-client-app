@@ -1,5 +1,21 @@
 {
     "global": {
+//        "process":{
+//              "id" : "Id",
+//              "url" : "Url",
+//              "version" :"Version",
+//              "key" : "Key" ,
+//              "category" : "Category" ,
+//              "suspended" : "Suspended" ,
+//              "name" : "Name",
+//              "description" : "Description",
+//              "deploymentId" : "DeploymentId",
+//              "deploymentUrl" : "DeploymentUrl",
+//              "graphicalNotationDefined" : "GraphicalNotationDefined",
+//              "resource" : "Resource",
+//              "diagramResource" : "DiagramResource",
+//              "startFormDefined" : "startFormDefined"
+//        },
         "title": "Gateway",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
