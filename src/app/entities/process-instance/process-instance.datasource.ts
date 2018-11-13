@@ -1,12 +1,8 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { catchError, finalize } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
 import { ProcessInstanceService } from './process-instance.service';
-import { ProcessInstance, ProcessInstanceQueryEntry } from './process-instance.model';
-import { ProcessResponseQuery, } from './process-response.model';
-import { Page, PaginationModel } from './page.model';
+import { ProcessInstanceQueryEntry } from './process-instance.model';
 
 export class ProcessInstanceDataSource implements DataSource<ProcessInstanceQueryEntry> {
 
@@ -36,31 +32,5 @@ export class ProcessInstanceDataSource implements DataSource<ProcessInstanceQuer
     this.processInstanceSubject.complete();
     this.loadingSubject.complete();
     this.totalSubject.complete();
-  }
-
-  queryProcessInstance(
-    sortProperty: string,
-    sortDirection: string = 'asc', pageIndex: number, pageSize: number) {
-
-    this.loadingSubject.next(true);
-
-    this.processService.query(pageIndex, pageSize, sortProperty, sortDirection).pipe(
-      catchError(() => of([])),
-      finalize(() => this.loadingSubject.next(false))
-    )
-      .subscribe((instances: ProcessResponseQuery) => {
-        if (instances.list) {
-          if (instances.list.entries) {
-            const entries = instances.list.entries;
-            this.processInstances = Object.assign([], entries);
-            this.processInstanceSubject.next( this.processInstances );
-          }
-          const page: PaginationModel = instances.list.pagination;
-          this.totalSubject.next(page.totalItems);
-        } else {
-          this.processInstanceSubject.next([]);
-        }
-      });
-
-  }
+ }
 }

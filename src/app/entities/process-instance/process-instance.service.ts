@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
-import { ProcessResponseQuery } from './process-response.model';
 import { SERVER_API_URL } from 'src/app/app.constants';
+import { createRequestOption } from '../../shared/util/request-util';
+import { ProcessInstance } from './process-instance.model';
 
 @Injectable()
 export class ProcessInstanceService {
@@ -13,24 +14,9 @@ export class ProcessInstanceService {
     private http: HttpClient) {
   }
 
-  query(page?: number, size?: number, sortProperty?: string, sortDirection?: string ): Observable<ProcessResponseQuery> {
-    let sorting: string;
-    if (sortProperty && sortDirection) {
-      sorting = `${sortProperty},${sortDirection}`;
-    }
-    const params = new HttpParams()
-      .set('page', page + '')
-      .set('size', size + '')
-      .set('sort', sorting);
-
-    return this.http
-      .get<ProcessResponseQuery>(SERVER_API_URL + `/query/v1/process-instances`, {
-        headers: {
-          'Accept': 'application/json'
-        }, params: params
-      }).map((instances: ProcessResponseQuery) => {
-        return instances;
-      });
+  query(req?: any ): Observable<HttpResponse<ProcessInstance[]>> {
+    const options = createRequestOption(req);
+    return this.http.get<ProcessInstance[]>(SERVER_API_URL + `/api-vessel-rb/v1/process-instances`, {params: options, observe : 'response'});
   }
 
   suspend(runtimeBundle: string, processInstanceId: string) {

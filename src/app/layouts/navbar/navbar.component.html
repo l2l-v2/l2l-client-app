@@ -5,7 +5,7 @@
         </a>
         <a class="navbar-brand logo float-left" routerLink="/" (click)="collapseNavbar()">
             <span class="logo-img"></span>
-            <span jhiTranslate="global.title" class="navbar-title">Gateway</span> <span class="navbar-version">{{version}}</span>
+            <span jhiTranslate="global.title" class="navbar-title"></span> <span class="navbar-version">{{version}}</span>
         </a>
     </div>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
@@ -33,7 +33,7 @@
                   <li>
                     <a class="dropdown-item" routerLink="/process-instances" routerLinkActive="active" (click)="collapseNavbar()">
                       <fa-icon [icon]="'road'" [fixedWidth]="true"></fa-icon>
-                      <span jhiTranslate="entity.menu.processInstance">ProcessInstances</span>
+                      <span jhiTranslate="entity.menu.runtimeBundle">Runtime Bundle</span>
                     </a>
                   </li>
                 </ul>
