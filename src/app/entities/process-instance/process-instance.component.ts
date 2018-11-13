@@ -9,10 +9,11 @@ import { ProcessInstanceService } from './process-instance.service';
 import { ProcessInstance, ProcessInstanceQueryEntry } from './process-instance.model';
 import { ProcessInstanceDataSource } from './process-instance.datasource';
 import { SelectionModel } from '@angular/cdk/collections';
+import { User } from "../../core";
 
 @Component({
   selector: 'l2l-process-instance',
-  templateUrl: './process-instance.component.html',
+  templateUrl: './process-instance-temp.component.html',
   styleUrls: ['./process-instance.component.scss']
 })
 export class ProcessInstanceComponent implements OnInit, AfterViewInit {
@@ -106,6 +107,10 @@ export class ProcessInstanceComponent implements OnInit, AfterViewInit {
       () => {
         console.log('The POST observable is now completed.');
       });
+  }
+
+  trackIdentity(index, item: ProcessInstance) {
+    return item.id;
   }
 
   onRowClick(row: ProcessInstanceQueryEntry) {

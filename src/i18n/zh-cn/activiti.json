@@ -1,0 +1,10 @@
+{
+  "processInstance" :　{
+    "applicationName" : "Application Name",
+    "status" : "Status",
+    "processDefinitionId" : "ProcessDefinition ID",
+    "startDate" : "Start Date",
+    "lastModifiedDate" : "Last Modified Date",
+    "actions" : "Operations"
+  }
+}
