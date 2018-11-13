@@ -23,11 +23,5 @@ import { JhiLanguageService } from 'ng-jhipster';
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class EntityModule {
-  constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
-    this.languageHelper.language.subscribe((languageKey: string) => {
-      if (languageKey !== undefined) {
-        this.languageService.changeLanguage(languageKey);
-      }
-    });
-  }
+
 }

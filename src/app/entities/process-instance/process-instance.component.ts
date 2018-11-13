@@ -1,19 +1,15 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
-import { startWith, tap, delay } from 'rxjs/operators';
-import { fromEvent } from 'rxjs/observable/fromEvent';
-import { merge } from 'rxjs/observable/merge';
-import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
-import { debounceTime } from 'rxjs/operators/debounceTime';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ProcessInstanceService } from './process-instance.service';
 import { ProcessInstance, ProcessInstanceQueryEntry } from './process-instance.model';
 import { ProcessInstanceDataSource } from './process-instance.datasource';
-import { SelectionModel } from '@angular/cdk/collections';
-import { User } from "../../core";
+import { ActivatedRoute, Router } from '@angular/router';
+import { ITEMS_PER_PAGE } from '../../shared';
+import { HttpResponse } from '@angular/common/http';
+import { JhiAlertService, JhiParseLinks } from 'ng-jhipster';
 
 @Component({
   selector: 'l2l-process-instance',
-  templateUrl: './process-instance-temp.component.html',
+  templateUrl: './process-instance.component.html',
   styleUrls: ['./process-instance.component.scss']
 })
 export class ProcessInstanceComponent implements OnInit, AfterViewInit {
@@ -23,34 +19,66 @@ export class ProcessInstanceComponent implements OnInit, AfterViewInit {
   total: number;
 
   actions: Array<any> = [];
+  success: any;
+  routeData: any;
+  links: any;
+  totalItems: any;
+  queryCount: any;
+  itemsPerPage: any;
+  page: any;
+  predicate: any;
+  previousPage: any;
+  reverse: any;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
-  constructor(private processInstanceService: ProcessInstanceService) { }
+  constructor(private processInstanceService: ProcessInstanceService ,
+              private alertService: JhiAlertService,
+              private parseLinks: JhiParseLinks,
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {
+    this.itemsPerPage = ITEMS_PER_PAGE;
+    this.routeData = this.activatedRoute.data.subscribe(data => {
+      this.page = data['pagingParams'].page;
+      this.previousPage = data['pagingParams'].page;
+      this.reverse = data['pagingParams'].ascending;
+      this.predicate = data['pagingParams'].predicate;
+    });
+  }
 
   ngOnInit() {
-    this.dataSource = new ProcessInstanceDataSource(this.processInstanceService);
+      this.loadAll();
   }
 
   ngAfterViewInit() {
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    merge(this.sort.sortChange, this.paginator.page)
-      .pipe(
-      startWith(null),
-      delay(0),
-      tap(() => this.queryInstances())
-      )
-      .subscribe();
+  }
+  sort() {
+    const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
+    if (this.predicate !== 'id') {
+      result.push('id');
+    }
+    return result;
+  }
+  private onSuccess(data, headers) {
+    this.links = this.parseLinks.parse(headers.get('link'));
+    this.totalItems = headers.get('X-Total-Count');
+    this.queryCount = this.totalItems;
+    this.instances = data;
   }
 
-  queryInstances(): void {
-    this.dataSource.queryProcessInstance(
-      this.sort.active,
-      this.sort.direction,
-      this.paginator.pageIndex,
-      this.paginator.pageSize);
+  private onError(error) {
+    this.alertService.error(error.error, error.message, null);
+  }
+  loadAll() {
+    this.processInstanceService
+      .query({
+        page: this.page - 1,
+        size: this.itemsPerPage,
+        sort: this.sort()
+      })
+      .subscribe(
+        (res: HttpResponse<ProcessInstance[]>) => this.onSuccess(res.body, res.headers),
+        (res: HttpResponse<any>) => this.onError(res.body)
+      );
   }
 
   performAction(row: ProcessInstanceQueryEntry, key: string) {

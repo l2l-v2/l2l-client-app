@@ -1,0 +1,29 @@
+{
+    "processInstance":{
+      "title" : "Instances",
+      "applicationName": "Application Name",
+      "status": "Status",
+      "processDefinitionId": "ProcessDefinition ID",
+      "startDate": "Start Date",
+      "lastModifiedDate": "Last Modified Date",
+      "actions": {
+        "start": "Start a new Instance"
+      }
+    },
+    "process":{
+      "id" : "Id",
+      "url" : "Url",
+      "version" :"Version",
+      "key" : "Key" ,
+      "category" : "Category" ,
+      "suspended" : "Suspended" ,
+      "name" : "Name",
+      "description" : "Description",
+      "deploymentId" : "DeploymentId",
+      "deploymentUrl" : "DeploymentUrl",
+      "graphicalNotationDefined" : "GraphicalNotationDefined",
+      "resource" : "Resource",
+      "diagramResource" : "DiagramResource",
+      "startFormDefined" : "startFormDefined"
+    }
+}

@@ -80,7 +80,7 @@ module.exports = (options) => ({
         new MergeJsonWebpackPlugin({
             output: {
                 groupBy: [
-                    { pattern: "src/i18n/en/*.json", fileName: "i18n/activiti.json" },
+                    { pattern: "src/i18n/en/*.json", fileName: "i18n/en.json" },
                     { pattern: "src/i18n/zh-cn/*.json", fileName: "i18n/zh-cn.json" }
                     // jhipster-needle-i18n-language-webpack - JHipster will add/remove languages in this array
                 ]
