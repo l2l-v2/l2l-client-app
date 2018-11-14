@@ -24,9 +24,9 @@
           "version": "服务版本"
         },
         "businessKey": "业务关键字",
-        "version": "任务版本"
+        "version": "流程定义版本"
       },
-    "actions": "Operations"
+    "actions": "操作"
   },
   "task":{
     "title" : "任务",

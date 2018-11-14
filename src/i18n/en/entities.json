@@ -24,10 +24,10 @@
           "version": "serviceVersion"
         },
         "businessKey": "businessKey",
-        "verison": "definitionVersion",
-        "key": "myProcess_1",
-        "version": 1
-      }
+        "version": "definitionVersion",
+        "key": "myProcess_1"
+      },
+      "actions" : "Operation"
     },
     "task":{
       "title" : "Tasks",
@@ -43,9 +43,8 @@
           "version": "serviceVersion"
         },
         "businessKey": "businessKey",
-        "verison": "definitionVersion",
-        "key": "myProcess_1",
-        "version": 1
+        "version": "definitionVersion",
+        "key": "myProcess_1"
       },
       "actions": "Operations"
     }

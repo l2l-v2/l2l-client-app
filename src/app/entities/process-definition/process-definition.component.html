@@ -15,7 +15,7 @@
         <th jhiSortBy="appVersion"><span jhiTranslate="processDefinition.detail.app.version"></span> <fa-icon [icon]="'sort'"></fa-icon></th>
         <th jhiSortBy="serviceFullName"> <span jhiTranslate="processDefinition.detail.service.fullName"></span> <fa-icon [icon]="'sort'"></fa-icon></th>
         <th jhiSortBy="serviceType"><span jhiTranslate="processDefinition.detail.service.type"></span> <fa-icon [icon]="'sort'"></fa-icon></th>
-        <th jhiSortBy="serviceVersion"><span jhiTranslate="processDefinition.detail.service.verison"></span> <fa-icon [icon]="'sort'"></fa-icon></th>
+        <th jhiSortBy="serviceVersion"><span jhiTranslate="processDefinition.detail.service.version"></span> <fa-icon [icon]="'sort'"></fa-icon></th>
         <th jhiSortBy="key"><span jhiTranslate="processDefinition.detail.key"></span> <fa-icon [icon]="'sort'"></fa-icon></th>
         <th jhiSortBy="version"><span jhiTranslate="processDefinition.detail.version"></span> <fa-icon [icon]="'sort'"></fa-icon></th>
         <th ><span jhiTranslate="processDefinition.actions">Operations</span></th>
@@ -24,14 +24,14 @@
       </thead>
       <tbody *ngIf ="definitions">
       <tr *ngFor="let definition of definitions; trackBy: trackIdentity">
-        <td><a [routerLink]="['./new']">{{definition.entry.id}}</a></td>
-        <td>{{definition.entry.appName}}</td>
-        <td>{{definition.entry.appVersion}}</td>
-        <td>{{definition.entry.serviceFullName}}</td>
-        <td>{{definition.entry.serviceType}}</td>
-        <td>{{definition.entry.serviceVersion}}</td>
-        <td>{{definition.entry.key}}</td>
-        <td>{{definition.entry.version}}</td>
+        <td><a [routerLink]="['./new']">{{definition.id}}</a></td>
+        <td>{{definition.appName}}</td>
+        <td>{{definition.appVersion}}</td>
+        <td>{{definition.serviceFullName}}</td>
+        <td>{{definition.serviceType}}</td>
+        <td>{{definition.serviceVersion}}</td>
+        <td>{{definition.key}}</td>
+        <td>{{definition.version}}</td>
         <td class="text-right">
           <div class="btn-group flex-btn-group-container">
             <button type="submit"

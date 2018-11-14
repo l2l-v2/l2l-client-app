@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { SERVER_API_URL } from 'src/app/app.constants';
 import { createRequestOption } from '../../shared/util/request-util';
-import { ProcessDefinitionModel } from './process-definition.model';
+import { ProcessDefinitionResponse } from './process-definition.model';
 
 @Injectable()
 export class ProcessDefinitionService {
@@ -14,9 +14,9 @@ export class ProcessDefinitionService {
     private http: HttpClient) {
   }
 
-  query(runtimeBundle: string , req?: any ): Observable<HttpResponse<ProcessDefinitionModel[]>> {
+  query(runtimeBundle: string , req?: any ): Observable<HttpResponse<ProcessDefinitionResponse[]>> {
     const options = createRequestOption(req);
-    return this.http.get<ProcessDefinitionModel[]>(SERVER_API_URL + `/${runtimeBundle}/v1/process-definitions`,
+    return this.http.get<ProcessDefinitionResponse[]>(SERVER_API_URL + `/${runtimeBundle}/v1/process-definitions`,
       {params: options, observe : 'response'});
   }
 

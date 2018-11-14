@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ProcessDefinitionService } from './process-definition.service';
-import { ProcessDefinitionModel } from './process-definition.model';
+import { ProcessDefinitionModel, ProcessDefinitionResponse } from './process-definition.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITEMS_PER_PAGE } from '../../shared';
 import { HttpResponse } from '@angular/common/http';
@@ -68,7 +68,10 @@ export class ProcessDefinitionComponent implements OnInit, AfterViewInit {
   private onSuccess(data, headers) {
     this.totalItems = headers.get('X-Total-Count');
     this.queryCount = this.totalItems;
-    this.definitions = data.list.entries;
+    this.definitions = [];
+    data.list.entries.forEach((val , idx , array) => {
+      this.definitions.push(val.entry);
+    });
     console.log('definitions', this.definitions);
   }
 
@@ -83,7 +86,7 @@ export class ProcessDefinitionComponent implements OnInit, AfterViewInit {
         sort: this.sort()
       })
       .subscribe(
-        (res: HttpResponse<ProcessDefinitionModel[]>) => this.onSuccess(res.body, res.headers),
+        (res: HttpResponse<ProcessDefinitionResponse[]>) => this.onSuccess(res.body, res.headers),
         (res: HttpResponse<any>) => this.onError(res.body)
       );
   }

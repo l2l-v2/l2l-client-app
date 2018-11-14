@@ -1,3 +1,5 @@
+import { PaginationModel } from '../page.model';
+
 export interface ProcessInstance {
     id?: string;
     applicationName?: string;
@@ -9,6 +11,13 @@ export interface ProcessInstance {
     lastModified?: string;
 }
 
-export interface ProcessInstanceQueryEntry {
+export interface ProcessInstanceEntry {
   entry: ProcessInstance;
+}
+
+export interface ProcessInstanceResponse {
+  list: {
+    entries: ProcessInstanceEntry [];
+    pagination: PaginationModel;
+  };
 }

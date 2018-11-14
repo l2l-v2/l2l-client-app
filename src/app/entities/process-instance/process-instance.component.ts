@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ProcessInstanceService } from './process-instance.service';
-import { ProcessInstance, ProcessInstanceQueryEntry } from './process-instance.model';
-import { ProcessInstanceDataSource } from './process-instance.datasource';
+import { ProcessInstance } from './process-instance.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITEMS_PER_PAGE } from '../../shared';
 import { HttpResponse } from '@angular/common/http';
@@ -14,7 +13,6 @@ import { JhiAlertService, JhiParseLinks } from 'ng-jhipster';
 })
 export class ProcessInstanceComponent implements OnInit, AfterViewInit {
   private instances: ProcessInstance[];
-  dataSource: ProcessInstanceDataSource;
   displayedColumns = ['id', 'applicationName', 'status', 'processDefinitionId', 'lastModified', 'actions'];
   total: number;
 
@@ -82,73 +80,10 @@ export class ProcessInstanceComponent implements OnInit, AfterViewInit {
       );
   }
 
-  performAction(row: ProcessInstanceQueryEntry, key: string) {
-    if (key === 'suspend') {
-      this.suspend(row);
-    } else {
-      this.activate(row);
-    }
-  }
-
-  activate(row: ProcessInstanceQueryEntry): void {
-    this.processInstanceService.activate(row.entry.applicationName, row.entry.id)
-    .subscribe(
-      (response) => {
-        const mockRes = <ProcessInstanceQueryEntry>{
-          entry: {
-          applicationName: row.entry.applicationName,
-          id: row.entry.id,
-          processDefinitionId: row.entry.processDefinitionId,
-          lastModified: row.entry.lastModified,
-          status: 'RUNNING'
-          }
-        };
-        this.dataSource.update(mockRes);
-        console.log('POST call successful value returned in body');
-    },
-      (error) => {
-        console.log('POST call in error', error.message);
-      },
-      () => {
-        console.log('The POST observable is now completed.');
-      });
-  }
-
-  suspend(row: ProcessInstanceQueryEntry): void {
-    this.processInstanceService.suspend(row.entry.applicationName, row.entry.id)
-    .subscribe(
-      (response) => {
-        const mockRes = <ProcessInstanceQueryEntry>{
-          entry : {
-          applicationName: row.entry.applicationName,
-          id: row.entry.id,
-          processDefinitionId: row.entry.processDefinitionId,
-          lastModified: row.entry.lastModified,
-          status: 'SUSPENDED'
-          }
-        };
-        this.dataSource.update(mockRes);
-        console.log('POST call successful value returned in body');
-    },
-      error => {
-        console.log('POST call in error', error.message);
-      },
-      () => {
-        console.log('The POST observable is now completed.');
-      });
-  }
-
   trackIdentity(index, item: ProcessInstance) {
     return item.id;
   }
 
-  onRowClick(row: ProcessInstanceQueryEntry) {
-    this.actions = [];
-    if (row.entry.status === 'RUNNING') {
-      this.actions.push({ key: 'suspend', icon: 'pause', label: 'Suspend' });
-    } else {
-      this.actions.push({ key: 'activate', icon: 'repeat', label: 'Activate' });
-    }
-  }
+
 
 }

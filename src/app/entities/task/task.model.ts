@@ -1,3 +1,5 @@
+import { PaginationModel } from '../page.model';
+
 export interface TaskModel {
     id?: string;
     applicationName?: string;
@@ -7,4 +9,14 @@ export interface TaskModel {
     startDate?: string;
     status?: string;
     lastModified?: string;
+}
+export interface TaskQueryEntry {
+  entry: TaskModel;
+}
+
+export interface TaskResponseQuery {
+  list: {
+    entries: TaskQueryEntry [];
+    pagination: PaginationModel;
+  };
 }
