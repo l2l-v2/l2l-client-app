@@ -1,11 +1,16 @@
 import { Routes } from '@angular/router';
 
 import {
-    processInstanceRoute
+    processInstanceRoute,
+    processDefinitionRoute,
+    taskRoute
+
 } from './';
 
 const ENTITY_ROUTES = [
-  processInstanceRoute
+  processInstanceRoute,
+  taskRoute,
+  processDefinitionRoute
 ];
 
 export const entityState: Routes = [

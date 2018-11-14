@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { TaskService } from './task.service';
-import { TaskModel } from './task.model';
+import { ProcessDefinitionService } from './process-definition.service';
+import { ProcessDefinitionModel } from './process-definition.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITEMS_PER_PAGE } from '../../shared';
 import { HttpResponse } from '@angular/common/http';
@@ -8,11 +8,11 @@ import { JhiAlertService, JhiParseLinks } from 'ng-jhipster';
 
 @Component({
   selector: 'l2l-process-definition',
-  templateUrl: './task.component.html',
-  styleUrls: ['./task.component.scss']
+  templateUrl: './process-definition.component.html',
+  styleUrls: ['./process-definition.component.scss']
 })
-export class TaskComponent implements OnInit, AfterViewInit {
-  private tasks: TaskModel[];
+export class ProcessDefinitionComponent implements OnInit, AfterViewInit {
+  private definitions: ProcessDefinitionModel[];
   total: number;
   actions: Array<any> = [];
   success: any;
@@ -27,9 +27,8 @@ export class TaskComponent implements OnInit, AfterViewInit {
   reverse: any;
   runtimeBundle: string;
 
-  constructor(private taskService: TaskService ,
+  constructor(private processDefinitionService: ProcessDefinitionService ,
               private alertService: JhiAlertService,
-              private parseLinks: JhiParseLinks,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
     this.itemsPerPage = ITEMS_PER_PAGE;
@@ -57,31 +56,40 @@ export class TaskComponent implements OnInit, AfterViewInit {
     }
     return result;
   }
+  transition() {
+    this.router.navigate(['/admin/user-management'], {
+      queryParams: {
+        page: this.page,
+        sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+      }
+    });
+    this.loadAll(this.runtimeBundle);
+  }
   private onSuccess(data, headers) {
-    this.links = this.parseLinks.parse(headers.get('link'));
     this.totalItems = headers.get('X-Total-Count');
     this.queryCount = this.totalItems;
-    this.tasks = data;
+    this.definitions = data.list.entries;
+    console.log('definitions', this.definitions);
   }
 
   private onError(error) {
     this.alertService.error(error.error, error.message, null);
   }
   loadAll(runtimeBundle: string) {
-    this.taskService
+    this.processDefinitionService
       .query(runtimeBundle , {
         page: this.page - 1,
         size: this.itemsPerPage,
         sort: this.sort()
       })
       .subscribe(
-        (res: HttpResponse<TaskModel[]>) => this.onSuccess(res.body, res.headers),
+        (res: HttpResponse<ProcessDefinitionModel[]>) => this.onSuccess(res.body, res.headers),
         (res: HttpResponse<any>) => this.onError(res.body)
       );
   }
 
 
-  trackIdentity(index, item: TaskModel) {
+  trackIdentity(index, item: ProcessDefinitionModel) {
     return item.id;
   }
 

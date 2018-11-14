@@ -9,5 +9,41 @@
     "actions": {
       "start": "启动流程实例"
     }
+  },
+  "processDefinition": {
+    "title": "ProcessDefinitions",
+    "detail": {
+        "id": "ID",
+        "app": {
+          "name": "应用名称",
+          "version": "应用版本"
+        },
+        "service": {
+          "fullName": "服务全名",
+          "type": "服务类型",
+          "version": "服务版本"
+        },
+        "businessKey": "业务关键字",
+        "version": "任务版本"
+      },
+    "actions": "Operations"
+  },
+  "task":{
+    "title" : "任务",
+    "detail": {
+      "id": "ID",
+      "app": {
+        "name": "应用名称",
+        "version": "应用版本"
+      },
+      "service": {
+        "fullName": "服务全名",
+        "type": "服务类型",
+        "version": "服务版本"
+      },
+      "businessKey": "业务关键字",
+      "version": "任务版本"
+    },
+    "actions": "Operations"
   }
 }

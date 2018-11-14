@@ -1,11 +1,11 @@
 import { Route } from '@angular/router';
-import { ProcessInstanceComponent } from './process-instance.component';
+import { ProcessDefinitionComponent } from './process-definition.component';
 import { JhiResolvePagingParams } from 'ng-jhipster';
 
 
-export const processInstanceRoute: Route = {
-  path: 'process-instances',
-  component: ProcessInstanceComponent,
+export const processDefinitionRoute: Route = {
+  path: 'process-definitions',
+  component: ProcessDefinitionComponent,
   resolve: {
     pagingParams: JhiResolvePagingParams
   },

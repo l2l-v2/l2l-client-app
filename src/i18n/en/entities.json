@@ -10,20 +10,43 @@
         "start": "Start a new Instance"
       }
     },
-    "process":{
-      "id" : "Id",
-      "url" : "Url",
-      "version" :"Version",
-      "key" : "Key" ,
-      "category" : "Category" ,
-      "suspended" : "Suspended" ,
-      "name" : "Name",
-      "description" : "Description",
-      "deploymentId" : "DeploymentId",
-      "deploymentUrl" : "DeploymentUrl",
-      "graphicalNotationDefined" : "GraphicalNotationDefined",
-      "resource" : "Resource",
-      "diagramResource" : "DiagramResource",
-      "startFormDefined" : "startFormDefined"
+    "processDefinition": {
+      "title": "ProcessDefinitions",
+      "detail": {
+        "id": "Id",
+        "app": {
+          "name": "appName",
+          "version": "appVersion"
+        },
+        "service": {
+          "fullName": "serviceFullName",
+          "type": "serviceType",
+          "version": "serviceVersion"
+        },
+        "businessKey": "businessKey",
+        "verison": "definitionVersion",
+        "key": "myProcess_1",
+        "version": 1
+      }
+    },
+    "task":{
+      "title" : "Tasks",
+      "detail": {
+        "id": "Id",
+        "app": {
+          "name": "appName",
+          "version": "appVersion"
+        },
+        "service": {
+          "fullName": "serviceFullName",
+          "type": "serviceType",
+          "version": "serviceVersion"
+        },
+        "businessKey": "businessKey",
+        "verison": "definitionVersion",
+        "key": "myProcess_1",
+        "version": 1
+      },
+      "actions": "Operations"
     }
 }

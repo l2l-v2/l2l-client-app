@@ -1,11 +1,11 @@
 import { Route } from '@angular/router';
-import { ProcessInstanceComponent } from './process-instance.component';
+import { TaskComponent } from './task.component';
 import { JhiResolvePagingParams } from 'ng-jhipster';
 
 
-export const processInstanceRoute: Route = {
-  path: 'process-instances',
-  component: ProcessInstanceComponent,
+export const taskRoute: Route = {
+  path: 'tasks',
+  component: TaskComponent,
   resolve: {
     pagingParams: JhiResolvePagingParams
   },

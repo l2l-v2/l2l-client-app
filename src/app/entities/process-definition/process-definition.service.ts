@@ -4,19 +4,19 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { SERVER_API_URL } from 'src/app/app.constants';
 import { createRequestOption } from '../../shared/util/request-util';
-import { ProcessInstance } from './process-instance.model';
+import { ProcessDefinitionModel } from './process-definition.model';
 
 @Injectable()
-export class ProcessInstanceService {
+export class ProcessDefinitionService {
 
 
   constructor(
     private http: HttpClient) {
   }
 
-  query(runtimeBundle: string , req?: any ): Observable<HttpResponse<ProcessInstance[]>> {
+  query(runtimeBundle: string , req?: any ): Observable<HttpResponse<ProcessDefinitionModel[]>> {
     const options = createRequestOption(req);
-    return this.http.get<ProcessInstance[]>(SERVER_API_URL + `/${runtimeBundle}/v1/process-instances`,
+    return this.http.get<ProcessDefinitionModel[]>(SERVER_API_URL + `/${runtimeBundle}/v1/process-definitions`,
       {params: options, observe : 'response'});
   }
 

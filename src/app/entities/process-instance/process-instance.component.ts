@@ -29,23 +29,25 @@ export class ProcessInstanceComponent implements OnInit, AfterViewInit {
   predicate: any;
   previousPage: any;
   reverse: any;
+  runtimeBundle: string;
 
   constructor(private processInstanceService: ProcessInstanceService ,
               private alertService: JhiAlertService,
-              private parseLinks: JhiParseLinks,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
     this.itemsPerPage = ITEMS_PER_PAGE;
     this.routeData = this.activatedRoute.data.subscribe(data => {
+      console.log(data);
       this.page = data['pagingParams'].page;
       this.previousPage = data['pagingParams'].page;
       this.reverse = data['pagingParams'].ascending;
       this.predicate = data['pagingParams'].predicate;
+      this.runtimeBundle = data['runtimeBundle'];
     });
   }
 
   ngOnInit() {
-      this.loadAll();
+      this.loadAll(this.runtimeBundle);
   }
 
   ngAfterViewInit() {
@@ -59,7 +61,6 @@ export class ProcessInstanceComponent implements OnInit, AfterViewInit {
     return result;
   }
   private onSuccess(data, headers) {
-    this.links = this.parseLinks.parse(headers.get('link'));
     this.totalItems = headers.get('X-Total-Count');
     this.queryCount = this.totalItems;
     this.instances = data;
@@ -68,9 +69,9 @@ export class ProcessInstanceComponent implements OnInit, AfterViewInit {
   private onError(error) {
     this.alertService.error(error.error, error.message, null);
   }
-  loadAll() {
+  loadAll(runtimeBundle: string) {
     this.processInstanceService
-      .query({
+      .query(runtimeBundle , {
         page: this.page - 1,
         size: this.itemsPerPage,
         sort: this.sort()

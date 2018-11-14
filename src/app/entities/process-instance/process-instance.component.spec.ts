@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProcessInstanceComponent } from './process-instance.component';
 
-describe('ProcessInstanceComponent', () => {
+describe('TaskComponent', () => {
   let component: ProcessInstanceComponent;
   let fixture: ComponentFixture<ProcessInstanceComponent>;
 

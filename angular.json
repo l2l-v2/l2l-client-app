@@ -8,9 +8,9 @@
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "l2l"
-  },
-  "defaultProject": "l2l-client-app",
-  "schematics": {
+    },
+   "defaultProject": "l2l-client-app",
+   "schematics": {
       "@schematics/angular:component": {
         "inlineStyle": true,
         "inlineTemplate": false,
