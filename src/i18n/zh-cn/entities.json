@@ -1,4 +1,7 @@
 {
+  "runtimeBundle" : {
+    "title" : "RuntimeBundle"
+  },
   "processInstance":{
     "title" : "流程实例",
     "applicationName": "应用域",
@@ -24,7 +27,11 @@
           "version": "服务版本"
         },
         "businessKey": "业务关键字",
-        "version": "流程定义版本"
+        "version": "流程定义版本",
+        "actions": {
+          "view": "查看",
+          "start": "启动"
+        }
       },
     "actions": "操作"
   },
@@ -42,7 +49,11 @@
         "version": "服务版本"
       },
       "businessKey": "业务关键字",
-      "version": "任务版本"
+      "version": "任务版本",
+      "actions": {
+        "view": "查看",
+        "complete": "完成"
+      }
     },
     "actions": "Operations"
   }

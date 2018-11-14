@@ -1,4 +1,7 @@
 {
+    "runtimeBundle" : {
+      "title" : "RuntimeBundle"
+    },
     "processInstance":{
       "title" : "Instances",
       "applicationName": "Application Name",
@@ -25,7 +28,11 @@
         },
         "businessKey": "businessKey",
         "version": "definitionVersion",
-        "key": "myProcess_1"
+        "key": "myProcess_1",
+        "actions": {
+          "view": "View",
+          "start": "Start"
+        }
       },
       "actions" : "Operation"
     },
@@ -44,7 +51,11 @@
         },
         "businessKey": "businessKey",
         "version": "definitionVersion",
-        "key": "myProcess_1"
+        "key": "myProcess_1",
+        "actions": {
+          "view": "View",
+          "Start": "Start"
+        }
       },
       "actions": "Operations"
     }

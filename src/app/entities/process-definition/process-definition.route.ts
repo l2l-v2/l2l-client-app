@@ -10,7 +10,7 @@ export const processDefinitionRoute: Route = {
     pagingParams: JhiResolvePagingParams
   },
   data: {
-    pageTitle: 'userManagement.home.title',
+    pageTitle: 'runtimeBundle.title',
     defaultSort: 'id,asc',
     runtimeBundle: 'api-vessel-rb'
   }
