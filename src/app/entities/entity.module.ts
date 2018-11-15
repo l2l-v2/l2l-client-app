@@ -10,6 +10,7 @@ import { ProcessDefinitionComponent } from './process-definition/process-definit
 import { TaskComponent } from './task/task.component';
 import { ProcessDefinitionService } from './process-definition/process-definition.service';
 import { TaskService } from './task/task.service';
+import { ProcessInstanceStartComponent } from "./process-definition/process-instance-start.component";
 
 
 @NgModule({
@@ -22,11 +23,13 @@ import { TaskService } from './task/task.service';
       ProcessInstanceComponent,
       ProcessDefinitionComponent,
       TaskComponent,
+      ProcessInstanceStartComponent
     ],
     entryComponents: [
       ProcessInstanceComponent,
       ProcessDefinitionComponent,
       TaskComponent,
+      ProcessInstanceStartComponent
     ],
     providers: [
       ProcessInstanceService,

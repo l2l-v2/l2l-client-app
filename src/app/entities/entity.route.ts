@@ -10,7 +10,7 @@ import {
 const ENTITY_ROUTES = [
   processInstanceRoute,
   taskRoute,
-  processDefinitionRoute
+  ...processDefinitionRoute
 ];
 
 export const entityState: Routes = [

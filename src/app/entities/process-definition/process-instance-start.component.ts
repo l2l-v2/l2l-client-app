@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ProcessDefinitionService } from './process-definition.service';
-import { ProcessDefinitionModel, ProcessDefinitionResponse } from './process-definition.model';
+import { ProcessDefinitionModel, ProcessDefinitionResponse, StartProcessPayload } from './process-definition.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITEMS_PER_PAGE } from '../../shared';
 import { HttpResponse } from '@angular/common/http';
@@ -8,11 +8,12 @@ import { JhiAlertService, JhiParseLinks } from 'ng-jhipster';
 
 @Component({
   selector: 'l2l-process-definition',
-  templateUrl: './process-definition.component.html',
+  templateUrl: './process-instance-start.component.html',
   styleUrls: ['./process-definition.component.scss']
 })
-export class ProcessDefinitionComponent implements OnInit, AfterViewInit {
-  private definitions: ProcessDefinitionModel[];
+export class ProcessInstanceStartComponent implements OnInit, AfterViewInit {
+  private processDefinition: ProcessDefinitionModel;
+  private startProcessPayload: StartProcessPayload;
   total: number;
   actions: Array<any> = [];
   success: any;
@@ -43,7 +44,7 @@ export class ProcessDefinitionComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-      this.loadAll(this.runtimeBundle);
+    this.readStartForm();
   }
 
   ngAfterViewInit() {
@@ -63,38 +64,24 @@ export class ProcessDefinitionComponent implements OnInit, AfterViewInit {
         sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
       }
     });
-    this.loadAll(this.runtimeBundle);
+    this.readStartForm();
   }
-  private onSuccess(data, headers) {
-    this.totalItems = headers.get('X-Total-Count');
-    this.queryCount = this.totalItems;
-    this.definitions = [];
-    data.list.entries.forEach((val , idx , array) => {
-      this.definitions.push(val.entry);
-    });
-    console.log('definitions', this.definitions);
-  }
-
-  private onError(error) {
-    this.alertService.error(error.error, error.message, null);
-  }
-  loadAll(runtimeBundle: string) {
-    this.processDefinitionService
-      .queryAll(runtimeBundle , {
-        page: this.page - 1,
-        size: this.itemsPerPage,
-        sort: this.sort()
-      })
-      .subscribe(
-        (res: HttpResponse<ProcessDefinitionResponse[]>) => this.onSuccess(res.body, res.headers),
-        (res: HttpResponse<any>) => this.onError(res.body)
-      );
-  }
-
-
   trackIdentity(index, item: ProcessDefinitionModel) {
     return item.id;
   }
 
+  readStartForm() {
+    this.processDefinitionService.readStartForm(this.runtimeBundle , this.processDefinition.id)
+      .subscribe(
+        (res: HttpResponse<StartProcessPayload>) => {
+            console.log('StartProcessPayload : ', res.body);
+        },
+        (res: HttpResponse<any>) => {
+
+        },
+        () => {
+          console.log('The POST observable is now completed.');
+        });
+  }
 
 }
