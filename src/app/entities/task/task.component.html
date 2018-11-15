@@ -25,11 +25,20 @@
       <tbody *ngIf ="tasks">
       <tr *ngFor="let task of tasks; trackBy: trackIdentity">
         <td><a [routerLink]="['./', user.login, 'view']">{{task.id}}</a></td>
-        <td>{{task.applicationName}}</td>
-        <td>{{task.status}}</td>
+        <td>{{task.appName}}</td>
+        <td>{{task.appVersion}}</td>
+        <td>{{task.assignee}}</td>
+        <td>{{task.createdDate| date:'dd/MM/yy HH:mm'}}</td>
+        <td>{{task.id}}</td>
+        <td>{{task.name}}</td>
+        <td>{{task.priority}}</td>
         <td>{{task.processDefinitionId}}</td>
-        <td>{{task.startDate| date:'dd/MM/yy HH:mm'}}</td>
-        <td>{{task.lastModified | date:'dd/MM/yy HH:mm'}}</td>
+        <td>{{task.processInstanceId}}</td>
+        <td>{{task.serviceFullName}}</td>
+        <td>{{task.serviceName}}</td>
+        <td>{{task.serviceType}}</td>
+        <td>{{task.serviceVersion}}</td>
+        <td>{{task.status}}</td>
         <td class="text-right">
           <div class="btn-group flex-btn-group-container">
             <button type="submit"

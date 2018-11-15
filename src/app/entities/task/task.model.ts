@@ -1,14 +1,20 @@
 import { PaginationModel } from '../page.model';
 
 export interface TaskModel {
-    id?: string;
-    applicationName?: string;
-    initiator?: string;
-    processDefinitionId?: string;
-    processDefinitionKey?: string;
-    startDate?: string;
-    status?: string;
-    lastModified?: string;
+  appName?: string;
+  appVersion?: string;
+  serviceName?: string;
+  serviceFullName?: string;
+  serviceType?: string;
+  serviceVersion?: string;
+  id?: string;
+  assignee?: string;
+  name?: string;
+  createdDate?: string;
+  priority?: string;
+  processDefinitionId?: string;
+  processInstanceId?: string;
+  status?: string;
 }
 export interface TaskQueryEntry {
   entry: TaskModel;

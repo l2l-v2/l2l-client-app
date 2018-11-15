@@ -16,20 +16,13 @@ export class TaskService {
 
   query(runtimeBundle: string , req?: any ): Observable<HttpResponse<TaskModel[]>> {
     const options = createRequestOption(req);
-    return this.http.get<TaskModel[]>(SERVER_API_URL + `/${runtimeBundle}/v1/process-instances`,
+    return this.http.get<TaskModel[]>(SERVER_API_URL + `/${runtimeBundle}/v1/tasks`,
       {params: options, observe : 'response'});
   }
 
-  suspend(runtimeBundle: string, processInstanceId: string) {
-    if (!!runtimeBundle && !!processInstanceId) {
-      return this.http.post(SERVER_API_URL +  + `/${runtimeBundle}/v1/process-instances/${processInstanceId}/suspend`,
-        undefined);
-    }
-  }
-
-  activate(runtimeBundle: string, processInstanceId: string) {
-    if (!!runtimeBundle && !!processInstanceId) {
-      return this.http.post(SERVER_API_URL +  `/${runtimeBundle}/v1/process-instances/${processInstanceId}/activate`,
+  complete(runtimeBundle: string, taskId: string) {
+    if (!!runtimeBundle && !!taskId) {
+      return this.http.post(SERVER_API_URL +  + `/${runtimeBundle}/v1/tasks/${processInstanceId}/complete`,
         undefined);
     }
   }
