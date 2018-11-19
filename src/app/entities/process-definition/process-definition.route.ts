@@ -1,7 +1,7 @@
 import { ActivatedRouteSnapshot, Resolve, Route, RouterStateSnapshot, Routes } from '@angular/router';
 import { ProcessDefinitionComponent } from './process-definition.component';
 import { JhiResolvePagingParams } from 'ng-jhipster';
-import { ProcessInstanceStartComponent } from './process-instance-start.component';
+import { ProcessStartComponent } from './process-start.component';
 import { Injectable } from '@angular/core';
 import { ProcessDefinitionService } from './process-definition.service';
 import { ProcessDefinition } from './process-definition.model';
@@ -33,8 +33,8 @@ export const processDefinitionRoute: Routes = [
     }
   },
   {
-    path: 'process-definitions/start',
-    component: ProcessInstanceStartComponent,
+    path: 'process-definitions/:processDefinitionId/start',
+    component: ProcessStartComponent,
     resolve: {
       processDefinition : ProcessDefinitionResolve
     },

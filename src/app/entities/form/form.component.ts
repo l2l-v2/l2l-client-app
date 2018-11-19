@@ -1,19 +1,18 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ProcessDefinitionService } from './process-definition.service';
-import { ProcessDefinitionModel, ProcessDefinitionResponse, StartProcessPayload } from './process-definition.model';
+import { FormService } from './form.service';
+import { FormDefinitionModel } from './form.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITEMS_PER_PAGE } from '../../shared';
 import { HttpResponse } from '@angular/common/http';
 import { JhiAlertService, JhiParseLinks } from 'ng-jhipster';
 
 @Component({
-  selector: 'l2l-process-definition',
-  templateUrl: './process-instance-start.component.html',
-  styleUrls: ['./process-definition.component.scss']
+  selector: 'l2l-activiti-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.scss']
 })
-export class ProcessInstanceStartComponent implements OnInit, AfterViewInit {
-  private processDefinition: ProcessDefinitionModel;
-  private startProcessPayload: StartProcessPayload;
+export class FormComponent implements OnInit, AfterViewInit {
+  private formDefinition: FormDefinitionModel;
   total: number;
   actions: Array<any> = [];
   success: any;
@@ -28,7 +27,7 @@ export class ProcessInstanceStartComponent implements OnInit, AfterViewInit {
   reverse: any;
   runtimeBundle: string;
 
-  constructor(private processDefinitionService: ProcessDefinitionService ,
+  constructor(private formService: FormService ,
               private alertService: JhiAlertService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
@@ -44,7 +43,6 @@ export class ProcessInstanceStartComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.readStartForm();
   }
 
   ngAfterViewInit() {
@@ -64,24 +62,11 @@ export class ProcessInstanceStartComponent implements OnInit, AfterViewInit {
         sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
       }
     });
-    this.readStartForm();
-  }
-  trackIdentity(index, item: ProcessDefinitionModel) {
-    return item.id;
   }
 
-  readStartForm() {
-    this.processDefinitionService.readStartForm(this.runtimeBundle , this.processDefinition.id)
-      .subscribe(
-        (res: HttpResponse<StartProcessPayload>) => {
-            console.log('StartProcessPayload : ', res.body);
-        },
-        (res: HttpResponse<any>) => {
 
-        },
-        () => {
-          console.log('The POST observable is now completed.');
-        });
+  private onError(error) {
+    this.alertService.error(error.error, error.message, null);
   }
 
 }
