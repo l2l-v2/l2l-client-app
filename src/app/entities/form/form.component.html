@@ -4,10 +4,11 @@
       <h2 id="myUserLabel">
         Activiti Form
       </h2>
-      <div>
+      <div *ngIf="formDefinition">
         <l2l-alert-error></l2l-alert-error>
+
         <div  *ngFor="let field of formDefinition.fields">
-          <div class="form-group" *ngif="field.type == 'string'" [hidden]="!field.id">
+          <div class="form-group" *ngIf="field.type == 'string'" [hidden]="!field.id">
             <label>{{field.name}}</label>
             <input type="text" class="form-control" name="id"
                    [(ngModel)]="field.value">

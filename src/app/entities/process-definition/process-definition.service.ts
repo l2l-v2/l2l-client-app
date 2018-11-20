@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { SERVER_API_URL } from 'src/app/app.constants';
 import { createRequestOption } from '../../shared/util/request-util';
-import { ProcessDefinitionResponse, StartProcessPayload } from './process-definition.model';
+import { ProcessDefinitionEntry, ProcessDefinitionsResponse, StartProcessPayload } from './process-definition.model';
 
 @Injectable()
 export class ProcessDefinitionService {
@@ -14,14 +14,14 @@ export class ProcessDefinitionService {
     private http: HttpClient) {
   }
 
-  queryAll(runtimeBundle: string , req?: any ): Observable<HttpResponse<ProcessDefinitionResponse[]>> {
+  queryAll(runtimeBundle: string , req?: any ): Observable<HttpResponse<ProcessDefinitionsResponse[]>> {
     const options = createRequestOption(req);
-    return this.http.get<ProcessDefinitionResponse[]>(SERVER_API_URL + `/${runtimeBundle}/v1/process-definitions`,
+    return this.http.get<ProcessDefinitionsResponse[]>(SERVER_API_URL + `/${runtimeBundle}/v1/process-definitions`,
       {params: options, observe : 'response'});
   }
 
-  queryOne(runtimeBundle: string , processDefinitionId: string ): Observable<HttpResponse<ProcessDefinitionResponse[]>> {
-    return this.http.get<ProcessDefinitionResponse[]>(SERVER_API_URL + `/${runtimeBundle}/v1/process-definitions/${processDefinitionId}`,
+  queryOne(runtimeBundle: string , processDefinitionId: string ): Observable<HttpResponse<ProcessDefinitionEntry>> {
+    return this.http.get<ProcessDefinitionEntry>(SERVER_API_URL + `/${runtimeBundle}/v1/process-definitions/${processDefinitionId}`,
       {observe : 'response'});
   }
 

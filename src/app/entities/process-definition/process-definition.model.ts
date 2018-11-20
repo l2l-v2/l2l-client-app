@@ -16,7 +16,7 @@ export interface ProcessDefinitionEntry {
   entry: ProcessDefinitionModel;
 }
 
-export interface ProcessDefinitionResponse {
+export interface ProcessDefinitionsResponse {
   list: {
     entries: ProcessDefinitionEntry [];
     pagination: PaginationModel;

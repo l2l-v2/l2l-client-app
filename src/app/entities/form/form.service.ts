@@ -13,15 +13,10 @@ export class FormService {
   }
 
   readStartForm(runtimeBundle: string , processDefinitionId: string ): Observable<HttpResponse<FormDefinitionModel>> {
-    if (!!runtimeBundle && !!processDefinitionId) {
-      return this.http.get<FormDefinitionModel>(SERVER_API_URL + `/${runtimeBundle}/v2/form/${processDefinitionId}`,
+    return this.http.get<FormDefinitionModel>(SERVER_API_URL + `/${runtimeBundle}/v2/startform/${processDefinitionId}`,
         { observe : 'response'});
-    }
   }
   // uodateStartForm(runtimeBundle: string , processDefinitionId: string , varMap: ): void{
-  //   if (!!runtimeBundle && !!processDefinitionId && !!startForm) {
-  //     this.http.post<>
-  //   }
   // }
 
 }

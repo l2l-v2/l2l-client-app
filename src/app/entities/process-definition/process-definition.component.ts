@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ProcessDefinitionService } from './process-definition.service';
-import { ProcessDefinitionModel, ProcessDefinitionResponse } from './process-definition.model';
+import { ProcessDefinitionModel, ProcessDefinitionsResponse } from './process-definition.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITEMS_PER_PAGE } from '../../shared';
 import { HttpResponse } from '@angular/common/http';
@@ -86,7 +86,7 @@ export class ProcessDefinitionComponent implements OnInit, AfterViewInit {
         sort: this.sort()
       })
       .subscribe(
-        (res: HttpResponse<ProcessDefinitionResponse[]>) => this.onSuccess(res.body, res.headers),
+        (res: HttpResponse<ProcessDefinitionsResponse[]>) => this.onSuccess(res.body, res.headers),
         (res: HttpResponse<any>) => this.onError(res.body)
       );
   }
