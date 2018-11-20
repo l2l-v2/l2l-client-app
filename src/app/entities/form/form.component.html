@@ -1,49 +1,46 @@
 <div class="row justify-content-center">
   <div class="col-8">
-    <div *ngIf="user">
-      <h2>
-        <span jhiTranslate="userManagement.detail.title">User</span> [<b>{{user.login}}</b>]
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+      <h2 id="myUserLabel" jhiTranslate="userManagement.home.createOrEditLabel">
+        Create or edit a User
       </h2>
-      <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="userManagement.login">Login</span></dt>
-        <dd>
-          <span>{{user.login}}</span>
-          <jhi-boolean
-            [value]="user.activated"
-            [textTrue]="'userManagement.activated' | translate"
-            [textFalse]="'userManagement.deactivated' | translate">
-          </jhi-boolean>
-        </dd>
-        <dt><span jhiTranslate="userManagement.firstName">First Name</span></dt>
-        <dd>{{user.firstName}}</dd>
-        <dt><span jhiTranslate="userManagement.lastName">Last Name</span></dt>
-        <dd>{{user.lastName}}</dd>
-        <dt><span jhiTranslate="userManagement.email">Email</span></dt>
-        <dd>{{user.email}}</dd>
-        <dt><span jhiTranslate="userManagement.langKey">Lang Key</span></dt>
-        <dd>{{user.langKey}}</dd>
-        <dt><span jhiTranslate="userManagement.createdBy">Created By</span></dt>
-        <dd>{{user.createdBy}}</dd>
-        <dt><span jhiTranslate="userManagement.createdDate">Created Date</span></dt>
-        <dd>{{user.createdDate | date:'dd/MM/yy HH:mm' }}</dd>
-        <dt><span jhiTranslate="userManagement.lastModifiedBy">Last Modified By</span></dt>
-        <dd>{{user.lastModifiedBy}}</dd>
-        <dt><span jhiTranslate="userManagement.lastModifiedDate">Last Modified Date</span></dt>
-        <dd>{{user.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</dd>
-        <dt><span jhiTranslate="userManagement.profiles">Profiles</span></dt>
-        <dd>
-          <ul class="list-unstyled">
-            <li *ngFor="let authority of user.authorities">
-              <span class="badge badge-info">{{authority}}</span>
-            </li>
-          </ul>
-        </dd>
-      </dl>
-      <button type="submit"
-              routerLink="../../"
-              class="btn btn-info">
-        <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-      </button>
-    </div>
+      <div>
+        <l2l-alert-error></l2l-alert-error>
+        <div *ngFor="let formField of formDefinition.fields">
+          <div class="form-group" *ngIf="formField.type === 'string'">
+            <label class="form-control-label">Login</label>
+            <input type="text" class="form-control" name="stringField" #stringField="ngModel"
+                   [(ngModel)]="formField.value" required minlength="1" maxlength="50" pattern="^[_.@A-Za-z0-9-]*$">
+
+            <div *ngIf="stringField.dirty && stringField.invalid">
+              <small class="form-text text-danger"
+                     *ngIf="stringField.errors.required" jhiTranslate="entity.validation.required">
+                This field is required.
+              </small>
+
+              <small class="form-text text-danger"
+                     *ngIf="stringField.errors.maxlength" jhiTranslate="entity.validation.maxlength"
+                     translateValues="{max: 50}">
+                This field cannot be longer than 50 characters.
+              </small>
+
+              <small class="form-text text-danger"
+                     *ngIf="stringField.errors.pattern" jhiTranslate="entity.validation.patternLogin">
+                This field can only contain letters, digits and e-mail addresses.
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button type="button" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span
+          jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+          <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
   </div>
 </div>
