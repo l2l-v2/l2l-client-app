@@ -1,45 +1,18 @@
 <div class="row justify-content-center">
   <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-      <h2 id="myUserLabel" jhiTranslate="userManagement.home.createOrEditLabel">
-        Create or edit a User
+    <form name="activitiForm" role="form" novalidate (ngSubmit)="save()" #activitiForm="ngForm">
+      <h2 id="myUserLabel">
+        Activiti Form
       </h2>
       <div>
         <l2l-alert-error></l2l-alert-error>
-        <div *ngFor="let formField of formDefinition.fields">
-          <div class="form-group" *ngIf="formField.type === 'string'">
-            <label class="form-control-label">Login</label>
-            <input type="text" class="form-control" name="stringField" #stringField="ngModel"
-                   [(ngModel)]="formField.value" required minlength="1" maxlength="50" pattern="^[_.@A-Za-z0-9-]*$">
-
-            <div *ngIf="stringField.dirty && stringField.invalid">
-              <small class="form-text text-danger"
-                     *ngIf="stringField.errors.required" jhiTranslate="entity.validation.required">
-                This field is required.
-              </small>
-
-              <small class="form-text text-danger"
-                     *ngIf="stringField.errors.maxlength" jhiTranslate="entity.validation.maxlength"
-                     translateValues="{max: 50}">
-                This field cannot be longer than 50 characters.
-              </small>
-
-              <small class="form-text text-danger"
-                     *ngIf="stringField.errors.pattern" jhiTranslate="entity.validation.patternLogin">
-                This field can only contain letters, digits and e-mail addresses.
-              </small>
-            </div>
+        <div  *ngFor="let field of formDefinition.fields">
+          <div class="form-group" *ngif="field.type == 'string'" [hidden]="!field.id">
+            <label>{{field.name}}</label>
+            <input type="text" class="form-control" name="id"
+                   [(ngModel)]="field.value">
           </div>
         </div>
-      </div>
-      <div>
-        <button type="button" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span
-          jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
-        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-          <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-        </button>
       </div>
     </form>
   </div>

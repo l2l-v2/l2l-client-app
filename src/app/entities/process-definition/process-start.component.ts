@@ -15,6 +15,7 @@ import { FormDefinitionModel } from '../form/form.model';
 export class ProcessStartComponent implements OnInit, AfterViewInit {
   private processDefinition: ProcessDefinitionModel;
   private startFormDefinition: FormDefinitionModel;
+  private startForm: FormDefinitionModel;
   total: number;
   actions: Array<any> = [];
   success: any;
@@ -72,7 +73,7 @@ export class ProcessStartComponent implements OnInit, AfterViewInit {
     this.formService.readStartForm(this.runtimeBundle , this.processDefinition.id)
       .subscribe(
         (res: HttpResponse<FormDefinitionModel>) => {
-            console.log('StartProcessPayload : ', res.body);
+            console.log('start form : ', res.body);
         },
         (res: HttpResponse<any>) => {
 
@@ -81,5 +82,5 @@ export class ProcessStartComponent implements OnInit, AfterViewInit {
           console.log('The POST observable is now completed.');
         });
   }
-
+  submitStartForm(){}
 }

@@ -20,10 +20,10 @@ export class TaskService {
       {params: options, observe : 'response'});
   }
 
-  complete(runtimeBundle: string, taskId: string) {
-    if (!!runtimeBundle && !!taskId) {
-      return this.http.post(SERVER_API_URL +  + `/${runtimeBundle}/v1/tasks/${processInstanceId}/complete`,
-        undefined);
-    }
-  }
+  // complete(runtimeBundle: string, taskId: string) {
+  //   if (!!runtimeBundle && !!taskId) {
+  //     return this.http.post(SERVER_API_URL +  + `/${runtimeBundle}/v1/tasks/${processInstanceId}/complete`,
+  //       undefined);
+  //   }
+  // }
 }
