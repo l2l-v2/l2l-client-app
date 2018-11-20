@@ -14,7 +14,7 @@ export class ProcessDefinitionResolve implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const id = route.params['processDefinitionId'] ? route.params['processDefinitionId'] : null;
     if (id) {
-      return this.service.queryOne(route.params['runtimeBundle'] , id);
+      return this.service.queryOne('api-vessel-rb', id);
     }
     return new ProcessDefinition();
   }
