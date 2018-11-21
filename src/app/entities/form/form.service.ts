@@ -13,7 +13,7 @@ export class FormService {
   }
 
   readStartForm(runtimeBundle: string , processDefinitionId: string ): Observable<HttpResponse<FormDefinitionModel>> {
-    return this.http.get<FormDefinitionModel>(SERVER_API_URL + `/${runtimeBundle}/v2/form/${processDefinitionId}`,
+    return this.http.get<FormDefinitionModel>(SERVER_API_URL + `/${runtimeBundle}/v2/startform/${processDefinitionId}`,
         { observe : 'response'});
   }
   readTaskForm(runtimeBundle: string , taskId: string ): Observable<HttpResponse<FormDefinitionModel>> {
