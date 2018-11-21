@@ -21,7 +21,7 @@ export class ProcessDefinitionResolve implements Resolve<any> {
     return new ProcessDefinition();
   }
 }
-export const processDefinitionRoute: Routes = [
+export const processDefinitionRoutes: Routes = [
   {
     path: 'process-definitions',
     component: ProcessDefinitionComponent,

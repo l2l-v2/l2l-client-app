@@ -36,6 +36,12 @@
     "actions": "操作"
   },
   "task":{
+    "name" :"名称",
+    "assignee" :"指派",
+    "createdDate" :"创建时间",
+    "processDefinitionId" : "流程定义Id",
+    "processInstanceId" : "流程实例Id",
+    "status" :"状态",
     "title" : "任务",
     "detail": {
       "id": "ID",

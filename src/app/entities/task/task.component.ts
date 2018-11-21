@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { TaskService } from './task.service';
-import { TaskModel } from './task.model';
+import {TaskModel, TasksResponse} from './task.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITEMS_PER_PAGE } from '../../shared';
 import { HttpResponse } from '@angular/common/http';
 import { JhiAlertService, JhiParseLinks } from 'ng-jhipster';
 
 @Component({
-  selector: 'l2l-process-definition',
+  selector: 'l2l-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss']
 })
@@ -29,7 +29,6 @@ export class TaskComponent implements OnInit, AfterViewInit {
 
   constructor(private taskService: TaskService ,
               private alertService: JhiAlertService,
-              private parseLinks: JhiParseLinks,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
     this.itemsPerPage = ITEMS_PER_PAGE;
@@ -57,32 +56,41 @@ export class TaskComponent implements OnInit, AfterViewInit {
     }
     return result;
   }
-  private onSuccess(data, headers) {
-    this.links = this.parseLinks.parse(headers.get('link'));
-    this.totalItems = headers.get('X-Total-Count');
-    this.queryCount = this.totalItems;
-    this.tasks = data;
-  }
 
-  private onError(error) {
-    this.alertService.error(error.error, error.message, null);
-  }
+
   loadAll(runtimeBundle: string) {
     this.taskService
-      .query(runtimeBundle , {
+      .queryAll(runtimeBundle , {
         page: this.page - 1,
         size: this.itemsPerPage,
         sort: this.sort()
       })
       .subscribe(
-        (res: HttpResponse<TaskModel[]>) => this.onSuccess(res.body, res.headers),
-        (res: HttpResponse<any>) => this.onError(res.body)
+        (res: HttpResponse<TasksResponse>) => {
+          this.queryCount = this.totalItems;
+          this.tasks = [];
+          res.body.list.entries.forEach((val , idx , array) => {
+            this.tasks.push(val.entry);
+            console.log('all tasks : ' , this.tasks);
+          });
+        },
+        (res: HttpResponse<any>) => {
+          console.log('query all tasks error');
+        }
       );
   }
 
 
   trackIdentity(index, item: TaskModel) {
     return item.id;
+  }
+  transition() {
+    this.router.navigate(['/task'], {
+      queryParams: {
+        page: this.page,
+        sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+      }
+    });
   }
 
 
