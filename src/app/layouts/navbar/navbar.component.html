@@ -36,6 +36,12 @@
                       <span jhiTranslate="entity.menu.runtimeBundle">Runtime Bundle</span>
                     </a>
                   </li>
+                  <li>
+                    <a class="dropdown-item" routerLink="/task" routerLinkActive="active" (click)="collapseNavbar()">
+                      <fa-icon [icon]="'road'" [fixedWidth]="true"></fa-icon>
+                      <span jhiTranslate="entity.menu.tasks">Tasks</span>
+                    </a>
+                  </li>
                 </ul>
             </li>
             <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">

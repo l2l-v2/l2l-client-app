@@ -89,7 +89,8 @@
     },
     "entity": {
         "menu" : {
-          "runtimeBundle" : "流程实例"
+          "runtimeBundle" : "流程实例",
+          "tasks" : "任务列表"
         },
         "action": {
             "addblob": "增加 BLOB",

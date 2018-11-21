@@ -1,19 +1,19 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormService } from '../form/form.service';
-import { ProcessDefinitionModel, StartProcessPayload } from './process-definition.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITEMS_PER_PAGE } from '../../shared';
 import { HttpResponse } from '@angular/common/http';
 import { JhiAlertService, JhiParseLinks } from 'ng-jhipster';
 import { FormDefinitionModel } from '../form/form.model';
+import {TaskModel} from './task.model';
 
 @Component({
-  selector: 'l2l-process-definition',
-  templateUrl: './process-start.component.html',
-  styleUrls: ['./process-definition.component.scss']
+  selector: 'l2l-task',
+  templateUrl: './task-start.component.html',
+  styleUrls: ['./task.component.scss']
 })
-export class ProcessStartComponent implements OnInit, AfterViewInit {
-  private processDefinition: ProcessDefinitionModel;
+export class TaskStartComponent implements OnInit, AfterViewInit {
+  private task: TaskModel;
   private startFormDefinition: FormDefinitionModel;
   total: number;
   actions: Array<any> = [];
@@ -30,22 +30,22 @@ export class ProcessStartComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(({ processDefinition }) => {
-      this.processDefinition = processDefinition.body ? processDefinition.body.entry : processDefinition;
-      console.log('processDefinition resolve =>', this.processDefinition);
+    this.activatedRoute.data.subscribe(({ task }) => {
+      this.task = task.body ? task.body.entry : task;
+      console.log('task resolve =>', this.task);
 
     });
-    this.readStartForm();
+    this.readTaskForm();
   }
 
   ngAfterViewInit() {
 
   }
-  readStartForm() {
-    this.formService.readStartForm(this.runtimeBundle , this.processDefinition.id).subscribe(
+  readTaskForm() {
+    this.formService.readTaskForm(this.runtimeBundle , this.task.id).subscribe(
       (res: HttpResponse<FormDefinitionModel>) => {
         this.startFormDefinition = res.body;
-        console.log('start form : ', this.startFormDefinition);
+        console.log('task form : ', this.startFormDefinition);
     });
   }
   submitStartForm() {}

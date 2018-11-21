@@ -7,6 +7,15 @@ export interface FormFieldModel {
     readOnly?: string;
 }
 
+export interface SubmitFormModel {
+  name: string;
+  value: string;
+}
+
 export interface FormDefinitionModel {
   fields: FormFieldModel[];
+}
+
+export interface  SubmitForm {
+  fields: SubmitForm[];
 }

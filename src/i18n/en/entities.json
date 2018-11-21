@@ -37,7 +37,13 @@
       "actions" : "Operation"
     },
     "task":{
+      "name" :"name",
+      "assignee" :"assignee",
+      "createdDate" :"createdDate",
       "title" : "Tasks",
+      "processDefinitionId" : "processDefinitionId",
+      "processInstanceId" : "processInstanceId",
+      "status" :"status",
       "detail": {
         "id": "Id",
         "app": {
