@@ -22,7 +22,7 @@ export interface TaskEntry {
 
 export interface TasksResponse {
   list: {
-    entries: TaskQueryEntry [];
+    entries: TaskEntry [];
     pagination: PaginationModel;
   };
 }
