@@ -4,7 +4,7 @@ import { JhiResolvePagingParams } from 'ng-jhipster';
 import {Injectable} from '@angular/core';
 import {TaskService} from './task.service';
 import { Task } from './task.model';
-import {TaskStartComponent} from './task-start.component';
+import {TaskCompleteComponent} from './task-complete.component';
 
 @Injectable({ providedIn: 'root' })
 export class TaskResolve implements Resolve<any> {
@@ -33,8 +33,8 @@ export const  taskRoutes: Routes = [
     }
   },
   {
-    path: 'task/:taskId/start',
-    component: TaskStartComponent,
+    path: 'task/:taskId/complete',
+    component: TaskCompleteComponent,
     resolve: {
       task : TaskResolve
     },

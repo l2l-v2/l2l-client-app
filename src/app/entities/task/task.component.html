@@ -31,17 +31,10 @@
         <td class="text-right">
           <div class="btn-group flex-btn-group-container">
             <button type="submit"
-                    [routerLink]="['./task']"
+                    [routerLink]="['./',task.id,'complete']"
                     class="btn btn-info btn-sm">
               <fa-icon [icon]="'eye'"></fa-icon>
               <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-            </button>
-            <button type="submit"
-                    [routerLink]="['./task']"
-                    queryParamsHandling="merge"
-                    class="btn btn-primary btn-sm">
-              <fa-icon [icon]="'pencil-alt'"></fa-icon>
-              <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
             </button>
           </div>
         </td>

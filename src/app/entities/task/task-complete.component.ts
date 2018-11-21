@@ -9,12 +9,12 @@ import {TaskModel} from './task.model';
 
 @Component({
   selector: 'l2l-task',
-  templateUrl: './task-start.component.html',
+  templateUrl: './task-complete.component.html',
   styleUrls: ['./task.component.scss']
 })
-export class TaskStartComponent implements OnInit, AfterViewInit {
+export class TaskCompleteComponent implements OnInit, AfterViewInit {
   private task: TaskModel;
-  private startFormDefinition: FormDefinitionModel;
+  private taskFormDefinition: FormDefinitionModel;
   total: number;
   actions: Array<any> = [];
   runtimeBundle: string;
@@ -44,8 +44,8 @@ export class TaskStartComponent implements OnInit, AfterViewInit {
   readTaskForm() {
     this.formService.readTaskForm(this.runtimeBundle , this.task.id).subscribe(
       (res: HttpResponse<FormDefinitionModel>) => {
-        this.startFormDefinition = res.body;
-        console.log('task form : ', this.startFormDefinition);
+        this.taskFormDefinition = res.body;
+        console.log('task form : ', this.taskFormDefinition);
     });
   }
   submitStartForm() {}

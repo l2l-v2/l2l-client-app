@@ -18,7 +18,7 @@ export class FormService {
   }
   readTaskForm(runtimeBundle: string , taskId: string ): Observable<HttpResponse<FormDefinitionModel>> {
     if (!!runtimeBundle && !! taskId) {
-      return this.http.get<FormDefinitionModel>(SERVER_API_URL + `/${runtimeBundle}/v2/gettaskform/${taskId}/`,
+      return this.http.get<FormDefinitionModel>(SERVER_API_URL + `/${runtimeBundle}/v2/taskform/${taskId}/`,
         { observe : 'response'});
     }
   }

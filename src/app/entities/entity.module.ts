@@ -13,7 +13,7 @@ import { TaskService } from './task/task.service';
 import { ProcessStartComponent } from './process-definition/process-start.component';
 import {FormService} from './form/form.service';
 import {FormComponent} from './form/form.component';
-import {TaskStartComponent} from './task/task-start.component';
+import {TaskCompleteComponent} from './task/task-complete.component';
 
 
 @NgModule({
@@ -28,7 +28,7 @@ import {TaskStartComponent} from './task/task-start.component';
       TaskComponent,
       ProcessStartComponent,
       FormComponent,
-      TaskStartComponent
+      TaskCompleteComponent
     ],
     entryComponents: [
       ProcessInstanceComponent,
@@ -36,7 +36,7 @@ import {TaskStartComponent} from './task/task-start.component';
       TaskComponent,
       ProcessStartComponent,
       FormComponent,
-      TaskStartComponent
+      TaskCompleteComponent
     ],
     providers: [
       ProcessInstanceService,
