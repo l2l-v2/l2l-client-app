@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ITEMS_PER_PAGE } from '../../shared';
 import { HttpResponse } from '@angular/common/http';
 import { JhiAlertService, JhiParseLinks } from 'ng-jhipster';
-import {processInstanceRoute} from "./process-instance.route";
 
 @Component({
   selector: 'l2l-process-instance',

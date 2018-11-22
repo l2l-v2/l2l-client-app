@@ -6,6 +6,7 @@ export * from './process-definition/process-definition.service';
 export * from './process-definition/process-definition.component';
 export * from './process-definition/process-definition.route';
 export * from './process-definition/process-definition.model';
+export * from './process-definition/process-start.component';
 export * from './task/task.service';
 export * from './task/task.component';
 export * from './task/task.route';

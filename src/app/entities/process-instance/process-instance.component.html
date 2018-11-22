@@ -13,12 +13,10 @@
         <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
         <th jhiSortBy="applicationName"><span jhiTranslate="processInstance.applicationName">Application Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
         <th jhiSortBy="status"><span jhiTranslate="processInstance.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-        <th></th>
         <th jhiSortBy="processDefinitionId"> <span jhiTranslate="processInstance.processDefinitionId">processDefinitionId</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-        <th><span jhiTranslate="userManagement.profiles">Profiles</span></th>
         <th jhiSortBy="startDate"><span jhiTranslate="processInstance.startDate">Last Modified Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
         <th jhiSortBy="lastModified"><span jhiTranslate="processInstance.lastModifiedDate">Last Modified Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-        <th ><span jhiTranslate="processInstance.actions">Operations</span></th>
+        <th ><span jhiTranslate="processInstance.actions.operation">Operations</span></th>
       </tr>
       </thead>
       <tbody *ngIf ="instances">

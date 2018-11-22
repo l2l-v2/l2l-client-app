@@ -10,7 +10,8 @@
       "startDate": "Start Date",
       "lastModifiedDate": "Last Modified Date",
       "actions": {
-        "start": "Start a new Instance"
+        "start": "Start a new Instance",
+        "operation": "Operations"
       }
     },
     "processDefinition": {
