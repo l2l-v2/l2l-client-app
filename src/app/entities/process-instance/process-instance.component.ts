@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ProcessInstanceService } from './process-instance.service';
-import { ProcessInstance } from './process-instance.model';
+import {ProcessInstance, ProcessInstancesResponse} from './process-instance.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITEMS_PER_PAGE } from '../../shared';
 import { HttpResponse } from '@angular/common/http';
 import { JhiAlertService, JhiParseLinks } from 'ng-jhipster';
+import {processInstanceRoute} from "./process-instance.route";
 
 @Component({
   selector: 'l2l-process-instance',
@@ -58,25 +59,25 @@ export class ProcessInstanceComponent implements OnInit, AfterViewInit {
     }
     return result;
   }
-  private onSuccess(data, headers) {
-    this.totalItems = headers.get('X-Total-Count');
-    this.queryCount = this.totalItems;
-    this.instances = data;
-  }
 
-  private onError(error) {
-    this.alertService.error(error.error, error.message, null);
-  }
   loadAll(runtimeBundle: string) {
     this.processInstanceService
-      .query(runtimeBundle , {
+      .queryAll(runtimeBundle , {
         page: this.page - 1,
         size: this.itemsPerPage,
         sort: this.sort()
       })
       .subscribe(
-        (res: HttpResponse<ProcessInstance[]>) => this.onSuccess(res.body, res.headers),
-        (res: HttpResponse<any>) => this.onError(res.body)
+        (res: HttpResponse<ProcessInstancesResponse>) => {
+          this.queryCount = this.totalItems;
+          this.instances = [];
+          res.body.list.entries.forEach((val) => {
+            this.instances.push(val.entry) ;
+          });
+        },
+        (res: HttpResponse<any>) => {
+          console.log('queryall error');
+        }
       );
   }
 

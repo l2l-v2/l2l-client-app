@@ -30,7 +30,8 @@ export interface IStartProcessPayload {
   processDefinitionKey?: string;
   processInstanceName?: string;
   businessKey?: string;
-  variables?: Map<string, object>;
+  variables?: any;
+  payloadType?: string;
 }
 
 export class StartProcessPayload implements IStartProcessPayload {
@@ -40,7 +41,8 @@ export class StartProcessPayload implements IStartProcessPayload {
       public processDefinitionKey?: string,
       public processInstanceName?: string,
       public businessKey?: string,
-      public variables?:  Map<string, object>
+      public variables?: any,
+      public payloadType?: string
   ) {
     this.id = id ? id : null;
     this.processDefinitionId = processDefinitionId ? processDefinitionId : null;
@@ -48,6 +50,7 @@ export class StartProcessPayload implements IStartProcessPayload {
     this.processInstanceName = processInstanceName ? processInstanceName : null;
     this.businessKey = businessKey ? businessKey : null;
     this.variables = variables ? variables : null;
+    this.payloadType = payloadType ? payloadType : null;
   }
 }
 

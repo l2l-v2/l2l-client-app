@@ -22,6 +22,7 @@ export class ProcessStartComponent implements OnInit, AfterViewInit {
   total: number;
   actions: Array<any> = [];
   runtimeBundle: string;
+  someArray:  Array<any> = [];
 
   constructor(private formService: FormService ,
               private alertService: JhiAlertService,
@@ -32,6 +33,7 @@ export class ProcessStartComponent implements OnInit, AfterViewInit {
       console.log(data);
       this.runtimeBundle = data['runtimeBundle'];
       this.startProcessPayload = new StartProcessPayload();
+      this.startProcessPayload.variables = {};
     });
   }
 
@@ -58,9 +60,16 @@ export class ProcessStartComponent implements OnInit, AfterViewInit {
   }
   submitStartForm() {
     this.startProcessPayload.id = UUID.UUID().toString();
-    console.log('process definition id : ' , this.processDefinition.id , this.startProcessPayload.id);
+    console.log('process definition id : ' , this.processDefinition.id , this.startProcessPayload);
     this.startProcessPayload.processDefinitionId = this.processDefinition.id;
     this.startProcessPayload.processInstanceName = this.processDefinition.serviceName;
+    this.startProcessPayload.payloadType = 'StartProcessPayload';
+    // 第一个是数组中的值，第二个为数组索引，第三个为数组本身
+    this.startFormDefinition.fields.forEach((val, idx, arr) => {
+      console.log('peocess idx' , val);
+      this.startProcessPayload.variables[val.id] = val.value;
+    });
+    console.log(this.startProcessPayload);
     this.processStartService.start(this.runtimeBundle, this.startProcessPayload)
       .subscribe(
         (res: HttpResponse<ProcessInstance>) => {

@@ -15,7 +15,7 @@ export interface ProcessInstanceEntry {
   entry: ProcessInstance;
 }
 
-export interface ProcessInstanceResponse {
+export interface ProcessInstancesResponse {
   list: {
     entries: ProcessInstanceEntry [];
     pagination: PaginationModel;

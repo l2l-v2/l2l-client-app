@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { SERVER_API_URL } from 'src/app/app.constants';
 import { createRequestOption } from '../../shared/util/request-util';
-import { ProcessInstance } from './process-instance.model';
+import { ProcessInstancesResponse } from './process-instance.model';
 
 @Injectable()
 export class ProcessInstanceService {
@@ -14,9 +14,9 @@ export class ProcessInstanceService {
     private http: HttpClient) {
   }
 
-  query(runtimeBundle: string , req?: any ): Observable<HttpResponse<ProcessInstance[]>> {
+  queryAll(runtimeBundle: string , req?: any ): Observable<HttpResponse<ProcessInstancesResponse>> {
     const options = createRequestOption(req);
-    return this.http.get<ProcessInstance[]>(SERVER_API_URL + `/${runtimeBundle}/v1/process-instances`,
+    return this.http.get<ProcessInstancesResponse>(SERVER_API_URL + `/${runtimeBundle}/v1/process-instances`,
       {params: options, observe : 'response'});
   }
 
