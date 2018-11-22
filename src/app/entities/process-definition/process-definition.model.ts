@@ -24,13 +24,31 @@ export interface ProcessDefinitionsResponse {
 }
 
 // start form
-export interface StartProcessPayload {
+export interface IStartProcessPayload {
   id?: string;
   processDefinitionId?: string;
   processDefinitionKey?: string;
   processInstanceName?: string;
   businessKey?: string;
   variables?: Map<string, object>;
+}
+
+export class StartProcessPayload implements IStartProcessPayload {
+  constructor (
+      public id?: string,
+      public processDefinitionId?: string,
+      public processDefinitionKey?: string,
+      public processInstanceName?: string,
+      public businessKey?: string,
+      public variables?:  Map<string, object>
+  ) {
+    this.id = id ? id : null;
+    this.processDefinitionId = processDefinitionId ? processDefinitionId : null;
+    this.processDefinitionKey = processDefinitionKey ? processDefinitionKey : null;
+    this.processInstanceName = processInstanceName ? processInstanceName : null;
+    this.businessKey = businessKey ? businessKey : null;
+    this.variables = variables ? variables : null;
+  }
 }
 
 

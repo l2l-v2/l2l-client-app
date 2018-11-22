@@ -14,6 +14,7 @@ import { ProcessStartComponent } from './process-definition/process-start.compon
 import {FormService} from './form/form.service';
 import {FormComponent} from './form/form.component';
 import {TaskCompleteComponent} from './task/task-complete.component';
+import {ProcessStartService} from './process-definition/process-start.service';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import {TaskCompleteComponent} from './task/task-complete.component';
       ProcessInstanceService,
       ProcessDefinitionService,
       TaskService,
-      FormService
+      FormService,
+      ProcessStartService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

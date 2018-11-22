@@ -6,6 +6,9 @@ import { ITEMS_PER_PAGE } from '../../shared';
 import { HttpResponse } from '@angular/common/http';
 import { JhiAlertService, JhiParseLinks } from 'ng-jhipster';
 import { FormDefinitionModel } from '../form/form.model';
+import {ProcessStartService} from './process-start.service';
+import {ProcessInstance} from '../process-instance/process-instance.model';
+import {UUID} from 'angular2-uuid';
 
 @Component({
   selector: 'l2l-process-definition',
@@ -15,6 +18,7 @@ import { FormDefinitionModel } from '../form/form.model';
 export class ProcessStartComponent implements OnInit, AfterViewInit {
   private processDefinition: ProcessDefinitionModel;
   private startFormDefinition: FormDefinitionModel;
+  private startProcessPayload: StartProcessPayload;
   total: number;
   actions: Array<any> = [];
   runtimeBundle: string;
@@ -22,10 +26,12 @@ export class ProcessStartComponent implements OnInit, AfterViewInit {
   constructor(private formService: FormService ,
               private alertService: JhiAlertService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private processStartService: ProcessStartService ) {
     this.activatedRoute.data.subscribe(data => {
       console.log(data);
       this.runtimeBundle = data['runtimeBundle'];
+      this.startProcessPayload = new StartProcessPayload();
     });
   }
 
@@ -37,7 +43,9 @@ export class ProcessStartComponent implements OnInit, AfterViewInit {
     });
     this.readStartForm();
   }
-
+  previousState() {
+    this.router.navigate(['/process-definitions']);
+  }
   ngAfterViewInit() {
 
   }
@@ -48,5 +56,16 @@ export class ProcessStartComponent implements OnInit, AfterViewInit {
         console.log('start form : ', this.startFormDefinition);
     });
   }
-  submitStartForm() {}
+  submitStartForm() {
+    this.startProcessPayload.id = UUID.UUID().toString();
+    console.log('process definition id : ' , this.processDefinition.id , this.startProcessPayload.id);
+    this.startProcessPayload.processDefinitionId = this.processDefinition.id;
+    this.startProcessPayload.processInstanceName = this.processDefinition.serviceName;
+    this.processStartService.start(this.runtimeBundle, this.startProcessPayload)
+      .subscribe(
+        (res: HttpResponse<ProcessInstance>) => {
+           console.log('start process : ' , res.body);
+        }
+      );
+  }
 }
